@@ -1,1 +1,75 @@
-// TODO
+@import '../styles/common.module';
+
+.content {
+  button {
+    border: none;
+    background-color: transparent;
+    color: $text-highlight;
+    margin-top: 6.4rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 2.17rem;
+    cursor: pointer;
+  }
+}
+
+.post {
+  a {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 3.38rem;
+    letter-spacing: -0.5px;
+    color: $text-heading;
+    text-decoration: none;
+
+    &:hover {
+      filter: opacity(40%);
+    }
+  }
+
+  p {
+    color: $text-body;
+    line-height: 2.17rem;
+    margin-top: 0.8rem;
+  }
+
+  .postFooter{
+    display: flex;
+    align-items: center;
+    margin-top: 2.4rem;
+
+    section {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: $text-info;
+      }
+
+      time {
+        margin-left: 0.8rem;
+        font-size: 1.4rem;
+        color: $text-info;
+      }
+
+      p {
+        margin-top: 0;
+        margin-left: 0.8rem;
+        font-size: 1.4rem;
+        color: $text-info;
+      }
+
+      & + section {
+        margin-left: 2.4rem;
+      }
+    }
+  }
+
+  & + .post {
+    margin-top: 50px;
+  }
+}
+

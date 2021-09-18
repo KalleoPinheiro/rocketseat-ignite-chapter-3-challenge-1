@@ -1,1 +1,113 @@
-// TODO
+@import '../../styles/common.module';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  max-width: 721px;
+  margin: 80px 0;
+}
+
+.info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 64px;
+}
+
+.date {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  & > time {
+    margin-left: 8px;
+  }
+}
+
+.post {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 16px;
+  }
+
+  a {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 3.38rem;
+    letter-spacing: -0.5px;
+    color: $text-heading;
+    text-decoration: none;
+
+    &:hover {
+      filter: opacity(40%);
+    }
+  }
+
+  p {
+    color: $text-body;
+    line-height: 2.17rem;
+    margin-top: 0.8rem;
+  }
+}
+
+.author {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 24px;
+
+  & > p {
+    margin-left: 8px;
+  }
+}
+
+.time {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 24px;
+
+  & > time {
+    margin-left: 8px;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 400px;
+  background-color: $img-background;
+  background-image: linear-gradient(
+    to right, $img-background 0%, lighten($img-background, 8%) 20%, $img-background 40%, $img-background 100%
+  );
+  animation: placeholderShimmer 1s linear infinite forwards;
+
+  @keyframes placeholderShimmer {
+    0% {
+      background-position: -1440px 0;
+    }
+    100% {
+      background-position: 1440px 0;
+    }
+  }
+}
+
+.title {
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: -0.5px;
+  color: $text-heading;
+}

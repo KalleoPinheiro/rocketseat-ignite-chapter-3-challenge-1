@@ -1,1 +1,12 @@
-// TODO
+$text-heading:#F8F8F8;
+$text-body: #D7D7D7;
+$text-info: #BBBBBB;
+$img-background: #C4C4C4;
+$text-highlight: #FF57B2;
+
+.container {
+  display: flex;
+  align-items: center;
+  width: 700px;
+  margin: 0 auto;
+}

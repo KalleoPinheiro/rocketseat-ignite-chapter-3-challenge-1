@@ -1,7 +1,29 @@
+@import './common.module.scss';
+
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// TODO
+html {
+  font-family: 'Inter', sans-serif;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  background-color: rgba(40, 44, 52, 0.83);
+  font-size: 1.8rem;
+  color: $text-body;
+}
