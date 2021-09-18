@@ -1,14 +1,13 @@
 import Prismic from '@prismicio/client';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiCalendar, FiUser } from 'react-icons/fi';
-import Header from "../components/Header";
+import Header from '../components/Header';
 import { getPrismicClient } from '../services/prismic';
 import { formatDate } from '../utils/date-format';
 import classes from './home.module.scss';
-
 
 interface Post {
   uid?: string;
@@ -29,7 +28,7 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
-const postMap = (posts: Post[]) => {
+const postMap = (posts: Post[]): Post[] => {
   return posts?.map(post => {
     return {
       uid: post.uid,
@@ -37,29 +36,29 @@ const postMap = (posts: Post[]) => {
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
-        author: post.data.author
-      }
-    }
-  })
-}
+        author: post.data.author,
+      },
+    };
+  });
+};
 
 export default function Home({ postsPagination }: HomeProps) {
-  const [posts, setPosts] = useState<PostPagination>({...postsPagination});
+  const [posts, setPosts] = useState<PostPagination>({ ...postsPagination });
 
-  const handleMorePosts = async() => {
-    if(posts.next_page) {
+  const handleMorePosts = async (): Promise<void> => {
+    if (posts.next_page) {
       const postsResponse = await fetch(posts.next_page)
-      .then(res => res.json())
-      .catch(err => console.error(err));
+        .then(res => res.json())
+        .catch(err => console.error(err));
 
       const postsMapped = postMap(postsResponse?.results);
 
       setPosts({
         next_page: postsResponse?.next_page,
         results: [...posts?.results, ...postsMapped],
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -67,7 +66,7 @@ export default function Home({ postsPagination }: HomeProps) {
         <title>Home | SpaceTraveling</title>
       </Head>
 
-      <Header/>
+      <Header />
       <div className={classes.container}>
         <main className={classes.content}>
           {posts?.results.map(post => (
@@ -78,35 +77,40 @@ export default function Home({ postsPagination }: HomeProps) {
               <p>{post.data.subtitle}</p>
               <div className={classes.postFooter}>
                 <section>
-                  <FiCalendar/>
-                  <time>{formatDate(new Date(post.first_publication_date))}</time>
+                  <FiCalendar />
+                  <time>
+                    {formatDate(new Date(post.first_publication_date))}
+                  </time>
                 </section>
                 <section>
-                  <FiUser/>
+                  <FiUser />
                   <p>{post.data.author}</p>
                 </section>
               </div>
             </article>
-            ))
-          }
+          ))}
 
-          {posts.next_page && <button onClick={() => handleMorePosts()}>Carregar mais posts</button>}
+          {posts.next_page && (
+            <button type="button" onClick={() => handleMorePosts()}>
+              Carregar mais posts
+            </button>
+          )}
         </main>
       </div>
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
-  const postsResponse = await prismic.query([
-    Prismic.Predicates.at('document.type', 'posts')
-  ], {
+  const postsResponse = await prismic.query(
+    [Prismic.Predicates.at('document.type', 'posts')],
+    {
       fetch: ['posts.title', 'posts.subtitle', 'posts.author'],
       pageSize: 1,
       page: 1,
     }
-  )
+  );
 
   const posts = postMap(postsResponse?.results);
 
@@ -115,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
       postsPagination: {
         next_page: postsResponse?.next_page,
         results: [...posts],
-      }
-    }
-  }
+      },
+    },
+  };
 };
